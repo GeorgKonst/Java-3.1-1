@@ -6,127 +6,100 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
+    Radio radio = new Radio(0, 10, 0, 100);
     @Test
+    //Проверка текущей станции
     public void shouldCurrentRadioStation(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
         radio.setRadioStationNumber(8);
         assertEquals(8, radio.getRadioStationNumber());
     }
     @Test
+    // Установка станции с пульта больше возможной
     public void shouldCurrentRadioStationUpperNotValid(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
         radio.setRadioStationNumber(11);
         assertEquals(0, radio.getRadioStationNumber());
     }
     @Test
+    //Установка станции с пульта меньше валидной
     public void shouldCurrentRadioStationLowerNotValid(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
-        radio.setRadioStationNumber(-5);
+        radio.setRadioStationNumber(-1);
         assertEquals(0, radio.getRadioStationNumber());
     }
 
     @Test
+    //Следущая станция
     public void shouldNexStation(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
         radio.setRadioStationNumber(5);
         radio.nextStation();
         assertEquals(6, radio.getRadioStationNumber());
     }
     @Test
+    //Следущая станция после максимальной
     public void shouldNexStationMax(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
-        radio.setRadioStationNumber(9);
+        radio.setRadioStationNumber(10);
         radio.nextStation();
         assertEquals(0, radio.getRadioStationNumber());
     }
     @Test
+    //Предыдущая станция
     public void shouldPrevStation(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
         radio.setRadioStationNumber(5);
         radio.prevStation();
         assertEquals(4, radio.getRadioStationNumber());
     }
     @Test
+    //Предыдущая станция после минимальной
     public void shouldPrevStationMin(){
-        Radio radio = new Radio();
-        radio.setMinRadioStationNumber(0);
-        radio.setMaxRadioStationNumber(9);
         radio.setRadioStationNumber(0);
         radio.prevStation();
-        assertEquals(9, radio.getRadioStationNumber());
+        assertEquals(10, radio.getRadioStationNumber());
     }
     @Test
+    //Текущая громкость
     public void shouldCurrentSoundVolume(){
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
-        radio.setSoundVolume(5);
-        assertEquals(5, radio.getSoundVolume());
+        radio.setSoundVolume(50);
+        assertEquals(50, radio.getSoundVolume());
     }
     @Test
+    //установка громкости выше лимита
     public void shouldCurrentSoundVolumeUpperNotValid(){
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
-        radio.setSoundVolume(11);
+        radio.setSoundVolume(101);
         assertEquals(0, radio.getSoundVolume());
     }
     @Test
+    //установка громкости ниже лимита
     public void shouldCurrentSoundVolumeLowerNotValid(){
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
         radio.setSoundVolume(-1);
         assertEquals(0, radio.getSoundVolume());
     }
     @Test
+    //уменьшение громкости
     public void shouldSoundVolumeDecrease(){
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
-        radio.setSoundVolume(5);
+        radio.setSoundVolume(1);
         radio.soundVolumeDecrease();
-        assertEquals(4, radio.getSoundVolume());
+        assertEquals(0, radio.getSoundVolume());
     }
 
     @Test
+    //уменьшение громкости после минимальной
     public void shouldSoundVolumeDecreaseMin(){
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
         radio.setSoundVolume(0);
         radio.soundVolumeDecrease();
         assertEquals(0, radio.getSoundVolume());
     }
     @Test
+    //увеличение громкости
     public void shouldSoundVolumeIncrease(){
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
-        radio.setSoundVolume(5);
+        radio.setSoundVolume(99);
         radio.soundVolumeIncrease();
-        assertEquals(6, radio.getSoundVolume());
+        assertEquals(100, radio.getSoundVolume());
     }
     @Test
+    //Увеличение громкости после максимальной
     public void shouldSoundVolumeIncreaseMax() {
-        Radio radio = new Radio();
-        radio.setMaxSoundVolume(10);
-        radio.setMinSoundVolume(0);
-        radio.setSoundVolume(10);
+        radio.setSoundVolume(100);
         radio.soundVolumeIncrease();
-        assertEquals(10, radio.getSoundVolume());
+        assertEquals(100, radio.getSoundVolume());
     }
 
 

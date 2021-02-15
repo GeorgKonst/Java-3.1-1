@@ -8,6 +8,14 @@ public class Radio {
     private int minSoundVolume;
     private int maxSoundVolume;
 
+    public Radio(int minRadioStationNumber, int maxRadioStationNumber, int minSoundVolume, int maxSoundVolume) {
+        this.minRadioStationNumber = minRadioStationNumber;
+        this.maxRadioStationNumber = maxRadioStationNumber;
+        this.minSoundVolume = minSoundVolume;
+        this.maxSoundVolume = maxSoundVolume;
+    }
+
+
     public int getRadioStationNumber() {
         return radioStationNumber;
     }
